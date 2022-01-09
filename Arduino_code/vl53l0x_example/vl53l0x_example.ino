@@ -9,7 +9,11 @@ void setup() {
   while (! Serial) {
     delay(1);
   }
-  
+
+  53LOX_init();
+}
+
+void 53LOX_init(){
   Serial.println("Adafruit VL53L0X test");
   if (!lox.begin()) {
     Serial.println(F("Failed to boot VL53L0X"));
@@ -19,8 +23,13 @@ void setup() {
   Serial.println(F("VL53L0X API Simple Ranging example\n\n")); 
 }
 
-
 void loop() {
+
+  53LOX_measure();  
+  delay(100);
+}
+
+void 53LOX_measure(){
   VL53L0X_RangingMeasurementData_t measure;
     
   Serial.print("Reading a measurement... ");
@@ -31,6 +40,4 @@ void loop() {
   } else {
     Serial.println(" out of range ");
   }
-    
-  delay(100);
 }
