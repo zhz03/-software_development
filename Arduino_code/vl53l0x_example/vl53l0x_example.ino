@@ -10,10 +10,10 @@ void setup() {
     delay(1);
   }
 
-  53LOX_init();
+  sensor_init();
 }
 
-void 53LOX_init(){
+void sensor_init(){
   Serial.println("Adafruit VL53L0X test");
   if (!lox.begin()) {
     Serial.println(F("Failed to boot VL53L0X"));
@@ -25,11 +25,11 @@ void 53LOX_init(){
 
 void loop() {
 
-  53LOX_measure();  
+  sensor_measure();  
   delay(100);
 }
 
-void 53LOX_measure(){
+void sensor_measure(){
   VL53L0X_RangingMeasurementData_t measure;
     
   Serial.print("Reading a measurement... ");
