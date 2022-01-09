@@ -3,6 +3,8 @@ This is a example main file
 just for demonstration perpuse
 
 """
+from cal_obj import calculation 
+from myplot import myplot 
 
 if __name__ == '__main__':
     """
