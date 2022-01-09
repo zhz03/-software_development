@@ -25,5 +25,11 @@ class myplot():
 
 
 
+if __name__ == '__main__':
+    x = [0,1,2,3,4,5]
 
+    y1 = [0,1,4,9,16,25]
+    y2 = [0,2,4,6,8,10]
 
+    mp = myplot()
+    mp.plot2y1x(x,y1,y2)
