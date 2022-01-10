@@ -2,7 +2,7 @@
 
 This is the master branch and it's only for the final release:
 
-![](1.png)
+![](pics/1.png)
 
 ## The main branches
 
@@ -53,7 +53,7 @@ Feature branches (or sometimes called topic branches) are used to develop new fe
 
 Feature branches typically exist in developer repos only, not in `origin`.
 
-![](2.jpg)
+![](pics/2.jpg)
 
 #### commands for feature brach
 
