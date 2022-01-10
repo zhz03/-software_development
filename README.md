@@ -4,7 +4,7 @@ This is the master branch and it's only for the final release:
 
 ![](pics/1.png)
 
-## The main branches
+## 1 The main branches
 
 The central repo holds two main branches with an infinite lifetime:
 
@@ -21,7 +21,7 @@ When the source code in the `develop` branch reaches a stable point and is ready
 
 Therefore, each time when changes are merged back into `master`, this is a new production release *by definition*. 
 
-## Supporting branches
+## 2 Supporting branches
 
 Next to the main branches `master` and `develop`, our development model uses a variety of supporting branches to aid parallel development between team members, ease tracking of features, prepare for production releases and to assist in quickly fixing live production problems. Unlike the main branches, these branches always have a limited life time, since they will be removed eventually.
 
@@ -35,7 +35,7 @@ Each of these branches have a specific purpose and are bound to strict rules as 
 
 By no means are these branches “special” from a technical perspective. The branch types are categorized by how we *use* them. They are of course plain old Git branches.
 
-### Feature branches
+### 2.1 Feature branches
 
 - May branch off from:
 
@@ -78,7 +78,7 @@ git branch -d feature1
 git push origin develop 
 ```
 
-### Release branch
+### 2.2 Release branch
 
 When the state of the develop branch is ready to become a real release, some actions need to be carried out. First, the release branch is merged into `master` (since every commit on `master` is a new release *by definition*, remember). Next, that commit on `master` must be tagged for easy future reference to this historical version. Finally, the changes made on the release branch need to be merged back into `develop`, so that future releases also contain these bug fixes.
 
@@ -95,3 +95,104 @@ git tag v1.0
 
 The release is now done, and tagged for feature reference. 
 
+## 3 Merge and rebase 
+
+After finishing the supporting branches, we need to merge them back to our main branches. There are two ways: 
+
+- Merge 
+- Rebase
+
+Use these two methods, the final history record will have a huge difference after two branches are combined.
+
+### 3.1 Merge
+
+Use **merge** can combine multiple history process.
+
+As shown in the figure below, the `bugfix` branch is forked from the `master` branch.
+
+![](pics/m1.png)
+
+When merging a `bugfix` branch to `master`, if the state of the `master` branch has not changed, then the merge is very simple. The history of the `bugfix` branch contains all the history of the `master` branch, so by moving the position of the `master` branch to the latest branch of the `bugfix`, Git will merge. Such a merge is called a **fast-forward merge**.
+
+![](pics/m2.png)
+
+However, the history of the `master` branch may have new updates after the `bugfix` branch was forked. In this case, we need to merge the changes in the `master` branch with the changes in the `bugfix` branch.
+
+![](pics/m3.png)
+
+Therefore, merging two modifications produces one commit. At this point, the HEAD of the `master` branch will be moved to this commit.
+
+![](pics/m4.png)
+
+#### Note
+
+When performing a merge, if the non fast-forward option is set, a new commit will be generated and merged even if fast-forward merge is possible:
+
+```shell
+git merge --no--ff example_merge_branch
+```
+
+![](pics/m5.png)
+
+After executing non fast-forward (`--no--ff`), the branch will remain the same. Then it's easy to find out what's going on in this branch.
+
+### 3.2 Rebase
+
+Like the merge example, the `bugfix` branch is forked from the `master` branch, as shown in the figure below.
+
+![](pics/m3.png)
+
+If you use the **rebase** method to merge branches, the history shown in the figure below will appear. Now let's briefly explain the **rebase** process.
+
+![](pics/m6.png)
+
+First, rebase the `bugfix` branch to the `master` branch, and the history of the `bugfix` branch will be added after the `master` branch. As shown, the history is recorded as a line, which is fairly neat.
+
+At this time, moving commits X and Y may conflict, so it is necessary to modify the conflicting parts of their respective commits.
+
+![](pics/m7.png)
+
+After rebase, the HEAD position of the `master` remains unchanged. Therefore, to merge the `master` branch and the `bugfix` branch, that is, move the HEAD of the master to the HEAD of the `bugfix`.
+
+#### Note
+
+Both **Merge** and **rebase** are merge histories, but each has different characteristics.
+
+- **Merge** 
+
+  Keep a history of what was modified, but history can be complicated
+
+- **Rebase**
+
+  The history record is simple, reflecting the difference content on the basis of the original submission.
+  As a result, the original submission may not function properly.
+
+### 3.3 Example
+
+For example, during the development of your supporting branches, you need to fix bugs:
+
+![](pics/e1.png)
+
+At this time, the main branch is still in the state before the development feature. By creating a new supporting branch that is used to correct errors, it can be separated from the work of developing functions so that new work can be started.
+
+![](pics/e2.png)
+
+After completing the work of bug fixing, import the branch into the original main branch and then make it public.
+
+![](pics/e3.png)
+
+Go back to the original branch to continue developing the function.
+
+![](pics/e4.png)
+
+However, if you want to go ahead, you'll find that you need to fix the content of the previous commit X when the bug was fixed. There are 2 ways to import the contents of commit X: one is to merge directly, and the other is to import the merged branch of commit X with rebase.
+
+Here we use the rebase method of merging branches.
+
+![](pics/e5.png)
+
+Continue to develop features with the contents of commit X imported.
+
+## A successful Git branching model
+
+![](pics/model1.png)
