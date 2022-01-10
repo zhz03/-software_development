@@ -21,7 +21,7 @@ class camera:
 	def __init__(self):
 		pass
 
-	def getPicture(self,index,path:
+	def getPicture(self,index,path):
 		"""
 	    Take a picture and save the images
 	    
@@ -48,3 +48,9 @@ class camera:
 	   	# shot down the windows()
 	   	cv2.destroyWindow("camera")
 	   	
+
+if __name__ == '__main__':
+	cam = camera()
+	index = 0
+	path = "./"
+	cam.getPicture(index,path)
