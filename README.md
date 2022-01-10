@@ -196,3 +196,11 @@ Continue to develop features with the contents of commit X imported.
 ## A successful Git branching model
 
 ![](pics/model1.png)
+
+## Reference
+
+[1] [Git book](https://git-scm.com/book/en/v2)
+
+[2] [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+
+[3] [猴子都能懂的Git入门](https://backlog.com/git-tutorial/cn/reference/)
