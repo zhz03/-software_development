@@ -1,5 +1,7 @@
 # software_development
 
+Author: Zhaoliang Zheng()
+
 This is the master branch and it's only for the final release:
 
 ![](pics/1.png)
@@ -55,9 +57,9 @@ Feature branches typically exist in developer repos only, not in `origin`.
 
 ![](pics/2.jpg)
 
-#### commands for feature brach
+#### commands for feature branch
 
-- creating a feature brach 
+- creating a feature branch 
 
 ```shell
 git checkout -b feature1 develop
@@ -192,6 +194,17 @@ Here we use the rebase method of merging branches.
 ![](pics/e5.png)
 
 Continue to develop features with the contents of commit X imported.
+
+## 4 Developing Rules
+
+### 4.1 Main Branches
+
+- `Master` branch can only be tagged and merged by the project technical supervisor
+- `Master` branch is the version release branch, and it must be tagged when a new version is ready to be released
+- `develop` branch is the main code development branch and all the team members should work on it
+- `develop` branch should always be up to date with the remote repo, so whoever modify on the `develop` branch should keep the modification time short to avoid conflict of two people developing at the same time.   
+- `supporting` branches like `feature` and `bugfix` branch are not necessary to push to the remote repo, but after you merge your branch to the develop, you must push changes. 
+- Delete your `supporting` branch after you merge to the `develop` branch. 
 
 ## A successful Git branching model
 
