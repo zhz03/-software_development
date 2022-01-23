@@ -203,6 +203,9 @@ Continue to develop features with the contents of commit X imported.
 - `Master` branch is the version release branch, and it must be tagged when a new version is ready to be released
 - `develop` branch is the main code development branch and all the team members should work on it
 - `develop` branch should always be up to date with the remote repo, so whoever modify on the `develop` branch should keep the modification time short to avoid conflict of two people developing at the same time.   
+
+### 4.2 Supporting Branches
+
 - `supporting` branches like `feature` and `bugfix` branch are not necessary to push to the remote repo, but after you merge your branch to the develop, you must push changes. 
 - Delete your `supporting` branch after you merge to the `develop` branch. 
 
